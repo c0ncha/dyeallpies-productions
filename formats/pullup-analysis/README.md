@@ -73,6 +73,31 @@ $PY tools/scripts/render_pullup_dashboard3.py work3/analysis.json out/pullup3-da
 $PY tools/scripts/build_pullup_page3.py work3/analysis.json out/pullup3-report.html work3/redness.json
 ```
 
+## Live tracking (2026-10-04, phone as the Mac's camera)
+
+`tools/scripts/live_pullups.py` counts and grades the reps while they happen: the iPhone is the
+camera (Continuity Camera), the Mac runs MediaPipe Pose and shows the counter, the phase, the
+elbow angle, the speed and a card per rep; a summary appears at the release and the session
+(clean video, landmarks in `extract_pose_mp.py`'s layout, per-rep JSON) is saved to `out/live/`.
+
+```bash
+python3 -m venv .venv-live && .venv-live/bin/pip install mediapipe==0.10.35 opencv-python numpy scipy
+.venv-live/bin/python tools/scripts/live_pullups.py cam=1 height=1.88 mass=79      # rot=90 for an upright phone; video=clip.mov replays a file
+```
+
+It is unrectified: the scale and the bar come from the dead hang (0.3 s with straight arms is
+enough), the chin verdict is the image-plane face-axis chin in a ±3 cm band with no depth
+allowance, and the filters are causal. The offline pipeline stays the reference.
+
+The muscle map is `tools/scripts/live_muscles.py`: the v4 model's chain and constants run one
+frame at a time (no heat or temperature, whose scale needs the finished set; the colour is the
+non-resting share of the pool, M_A + M_F), painted as soft regions from the landmarks, front or
+back, with a bar per prime mover (`m` toggles it). Each set's folder holds `set.mp4` (clean),
+`replay.mp4` (what the screen showed), `pose_mp.npz` and `live.json` (reps, summary, muscles);
+`tools/scripts/build_pullup_history.py` builds `out/live/history.html`, the page that compares
+the sets (rebuilt after every set). `session=<folder>` re-runs a saved set through the current
+code; height and mass are remembered in `out/live/profile.json`.
+
 ## Rules that came out of the third set (2026-09-08, floor camera, anatomy paint) — these supersede
 
 Worked example: `pullups-2026-09-08.md` (in this folder). Scripts:

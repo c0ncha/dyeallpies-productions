@@ -14,7 +14,7 @@ pillow==12.3.0
 # pose formats (pull-up analysis, push-up + cat counter) and the trend reel's camera moves.
 # CPU builds are enough; nothing here needs CUDA.
 opencv-python
-mediapipe
+mediapipe   # on macOS use 0.10.35: 1.0.x aborts in the Metal helper ("Service is unavailable") even on the CPU delegate
 ultralytics
 torch
 torchvision

@@ -1,0 +1,38 @@
+:root { --bg:#101215; --panel:#171a1f; --ink:#eceae4; --ink-2:#a2a7b0; --rule:#2b2f36; --accent:#f4794a; --pass:#4cbd7c; --warn:#e0aa3c; --hot:#f4674f; color-scheme:dark; }
+* { box-sizing:border-box; }
+html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Helvetica Neue",sans-serif; }
+body { display:flex; flex-direction:column; padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+button, select, input { font:inherit; color:inherit; }
+button { background:var(--panel); border:1px solid var(--rule); border-radius:8px; padding:8px 12px; cursor:pointer; }
+button.primary { background:var(--accent); border-color:var(--accent); color:#16100c; font-weight:700; padding:12px 22px; }
+header { display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; padding:8px 12px; }
+nav { display:flex; gap:6px; }
+.seg { display:inline-flex; border:1px solid var(--rule); border-radius:8px; overflow:hidden; }
+.seg button { border:0; border-radius:0; background:none; } .seg button.on { background:var(--accent); color:#16100c; font-weight:700; }
+#live { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; position:relative; }
+#canvas { max-width:100%; max-height:100%; display:block; }
+#video { position:absolute; width:2px; height:2px; opacity:0; pointer-events:none; }   /* kept in the page so Safari keeps decoding it */
+#start { text-align:center; padding:24px; max-width:460px; } #start h1 { margin:0 0 8px; }
+.small { color:var(--ink-2); font-size:13px; }
+#history { padding:8px 16px 40px; max-width:1100px; width:100%; margin:0 auto; overflow-y:auto; }
+#history .bar { display:flex; justify-content:space-between; align-items:center; } h2 { margin:8px 0; } h3 { margin:22px 0 8px; font-size:16px; }
+.tiles { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; } .tile { background:var(--panel); border:1px solid var(--rule); border-radius:8px; padding:10px 14px; min-width:104px; }
+.tile b { display:block; font-size:26px; font-variant-numeric:tabular-nums; } .tile span { color:var(--ink-2); font-size:13px; }
+.box { background:var(--panel); border:1px solid var(--rule); border-radius:8px; padding:12px; overflow-x:auto; }
+svg text { fill:var(--ink-2); font-size:12px; } svg .val { fill:var(--ink); font-weight:600; }
+.day { color:var(--ink-2); font-size:13px; margin:14px 0 6px; }
+.set { background:var(--panel); border:1px solid var(--rule); border-radius:8px; margin-bottom:8px; }
+.set.open { border-color:var(--accent); }
+.set summary, .set .head { display:flex; flex-wrap:wrap; gap:6px 16px; align-items:baseline; padding:10px 12px; cursor:pointer; font-variant-numeric:tabular-nums; }
+.set .head b { font-size:18px; } .set .head span { color:var(--ink-2); font-size:14px; } .set .head .best { color:var(--pass); }
+.detail { padding:0 12px 12px; } .detail video { width:100%; max-height:70vh; background:#000; border-radius:6px; }
+.scroll { overflow-x:auto; } table { border-collapse:collapse; width:100%; font-size:13px; font-variant-numeric:tabular-nums; margin:8px 0; }
+th, td { padding:4px 8px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--rule); } th { color:var(--ink-2); font-weight:500; } th:first-child, td:first-child { text-align:left; }
+.ok { color:var(--pass); } .mid { color:var(--warn); } .bad { color:var(--hot); }
+#sets.two { display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:10px; align-items:start; }
+dialog { background:var(--panel); color:var(--ink); border:1px solid var(--rule); border-radius:12px; padding:18px; width:min(92vw,380px); }
+dialog::backdrop { background:rgba(0,0,0,.6); }
+dialog label { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:10px 0; } dialog input[type=number] { width:64px; background:var(--bg); border:1px solid var(--rule); border-radius:6px; padding:6px; }
+dialog select { background:var(--bg); border:1px solid var(--rule); border-radius:6px; padding:6px; } dialog input[type=checkbox] { margin-right:8px; } dialog label:has(input[type=checkbox]) { justify-content:flex-start; }
+#tip { position:fixed; pointer-events:none; background:var(--ink); color:var(--bg); padding:5px 8px; border-radius:5px; font-size:12px; display:none; z-index:5; }
+[hidden] { display:none !important; }

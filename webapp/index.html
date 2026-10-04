@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101215">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:,">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<title>Rep Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="seg" id="exercise" role="tablist" aria-label="Exercise">
+    <button data-ex="pullup" class="on">Pull-ups</button><button data-ex="pushup">Push-ups</button>
+  </div>
+  <nav>
+    <button id="flip" title="Switch camera" aria-label="Switch camera" hidden>⟲ camera</button>
+    <button id="openHistory">History</button>
+    <button id="openSettings">Settings</button>
+  </nav>
+</header>
+
+<main id="live">
+  <div id="start">
+    <h1>Rep Tracker</h1>
+    <p id="startHint"></p>
+    <button id="startBtn" class="primary">Start camera</button>
+    <p class="small" id="status"></p>
+    <p class="small">Everything runs on this device. No video is uploaded.</p>
+  </div>
+  <video id="video" playsinline muted hidden></video>
+  <canvas id="canvas" hidden></canvas>
+</main>
+
+<section id="history" hidden>
+  <div class="bar"><h2>History</h2><button id="closeHistory">Back</button></div>
+  <div class="seg" id="filter"><button data-f="all" class="on">All</button><button data-f="pullup">Pull-ups</button><button data-f="pushup">Push-ups</button></div>
+  <div class="tiles" id="tiles"></div>
+  <h3>Reps per set</h3>
+  <div class="box"><svg id="bars" role="img" aria-label="Reps per set, oldest first"></svg></div>
+  <h3>Sets</h3>
+  <p class="small">Tap a set for its replay and reps. Open two to compare.</p>
+  <div id="sets"></div>
+  <p class="small">Saved in this browser on this device only. The chin and depth calls are read in the picture, unrectified. Fatigue is a muscle model's output, not a measurement.</p>
+  <button id="export">Export all sets (JSON)</button>
+</section>
+
+<dialog id="settings">
+  <form method="dialog">
+    <h2>Settings</h2>
+    <label>Units <select id="units"><option value="imperial">ft / lb</option><option value="metric">cm / kg</option></select></label>
+    <label class="imp">Height <span><input id="ft" type="number" min="3" max="8" inputmode="numeric"> ft <input id="inch" type="number" min="0" max="11.9" step="0.5" inputmode="decimal"> in</span></label>
+    <label class="imp">Weight <span><input id="lb" type="number" min="60" max="500" inputmode="decimal"> lb</span></label>
+    <label class="met">Height <span><input id="cm" type="number" min="100" max="230" inputmode="decimal"> cm</span></label>
+    <label class="met">Weight <span><input id="kg" type="number" min="30" max="230" inputmode="decimal"> kg</span></label>
+    <label><input id="voice" type="checkbox"> Say the rep count out loud</label>
+    <label><input id="muscles" type="checkbox"> Muscle map (pull-ups)</label>
+    <label><input id="replay" type="checkbox"> Save a replay of every set</label>
+    <label>Pose model <select id="model"><option value="lite">fast</option><option value="full">accurate</option></select></label>
+    <p class="small">Height sets the scale, weight the work and the muscle loads.</p>
+    <button class="primary" value="ok">Done</button>
+  </form>
+</dialog>
+<div id="tip"></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
